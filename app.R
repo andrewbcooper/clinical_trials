@@ -13,7 +13,7 @@ trials <- readRDS("trials.RDS")
 
 
 SiteStatus <- c(sort(unique(trials$STATUS))) #c(sort(unique(trials$SITESTATUS)))
-Phase <- c("Phase 1", "Phase 2", "Phase 3", "Phase 4") #c(sort(unique(trials$PHASE)))
+Phase <- c(sort(unique(trials$PHASE)))
 Condition <- c("Brain_Tumor","Germ_Cell_Tumor","Leukemia","Lymphoma","Sarcoma","Not_Cancer")
 names(Condition) = c("Brain Tumor","Germ Cell Tumor","Leukemia","Lymphoma","Sarcoma","Not Cancer")
 StudySite <- c(sort(unique(trials$CONSORTIUMSITE)))
@@ -142,12 +142,17 @@ ui <- fluidPage(
                        HTML("For technical questions about this page, please contact:  Andrew.Cooper@SeattleChildrens.Org"),
                        HTML("<br>"),
                        HTML("For information regarding Seattle Children's Hospital, please visit <a target='_blank' rel='noopener noreferrer' href='https://www.seattlechildrens.org/'>our web page</a>.")
-              )))
+              ),
+              tabPanel("Github Scheduling Code",
+                       h3("Write description here")
+                       
+                       
+                       
+                       
+                       )
+              ))
 
 server <- function(input, output,session) {
-  
-  #session <- sessionInfo()
-  #version <- paste0(session$R.version$major,".",session$R.version$minor)
   
   observeEvent(input$State_input,{
     xx <- trials %>% filter(STATE %in% input$State_input) %>% dplyr::select(CITYSTATE) %>% unique()  %>% data.frame()
@@ -163,8 +168,7 @@ server <- function(input, output,session) {
     data <- trials
     
     data <- data[data$STATUS %in% input$SiteStatus_input & 
-                   str_detect(data$PHASE,paste(c(input$Phase_input,"silly"), collapse = "|")) == TRUE &
-                   #data$PHASE %in% input$Phase_input &
+                   data$PHASE %in% input$Phase_input &
                    data$CONSORTIUMSITE %in% input$StudySite_input &
                    data$STATE %in% input$State_input &
                    data$CITYSTATE %in% input$City_input
@@ -237,6 +241,8 @@ server <- function(input, output,session) {
   }, escape = FALSE ,options = list(dom = 'ltp')
   
   ))
+  
+  
 }
 
 
