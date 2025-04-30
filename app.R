@@ -124,7 +124,7 @@ ui <- fluidPage(
                        div(DT::DTOutput("table"), style = "font-size:80%")
               ),
               tabPanel("Read Me",
-                       #h3("Write description here"),
+                       
                        HTML("The information provided on this dashboard is intended for general informational purposes only. It is designed to give an overview of clinical trial opportunities available for adolescents and young adults (AYA) with cancer. While we strive to ensure the accuracy and timeliness of the information, it is important to discuss any clinical trial options with your healthcare provider before making any decisions. Participation in clinical trials is voluntary, and eligibility may vary based on individual health conditions and medical history. Please consult with your medical team for personalized advice regarding clinical trial opportunities."),
                        HTML("<br>"),
                        HTML("<br>"),
@@ -142,14 +142,8 @@ ui <- fluidPage(
                        HTML("For technical questions about this page, please contact:  Andrew.Cooper@SeattleChildrens.Org"),
                        HTML("<br>"),
                        HTML("For information regarding Seattle Children's Hospital, please visit <a target='_blank' rel='noopener noreferrer' href='https://www.seattlechildrens.org/'>our web page</a>.")
-              ),
-              tabPanel("Github Scheduling Code",
-                       h3("Write description here")
+              )
                        
-                       
-                       
-                       
-                       )
               ))
 
 server <- function(input, output,session) {
